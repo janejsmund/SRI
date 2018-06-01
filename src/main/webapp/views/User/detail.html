@@ -1,0 +1,63 @@
+<header ng-switch on="$location.path().indexOf('/Users/new') > -1">
+    <h3 ng-switch-when="true">Create a new User</h3>
+    <h3 ng-switch-when="false">View or edit User</h3>
+</header>
+<form id="UserForm" name="UserForm" class="form-horizontal" role="form">
+    
+    <div class="form-group" ng-class="{'has-error': UserForm.login.$invalid}">
+        <label for="login" class="col-sm-2 control-label">Login</label>
+        <div id="loginControls" class="col-sm-10">
+            <input id="login" name="login" type="text" required ng-maxlength="25" ng-minlength="1" class="form-control" ng-model="user.login" placeholder="Enter the User Login"></input>
+            <span class="help-block error" ng-show="UserForm.login.$error.required">required</span> 
+            <span class="help-block error" ng-show="UserForm.login.$error.minlength">minimum length is 1</span>
+            <span class="help-block error" ng-show="UserForm.login.$error.maxlength">maximum length is 25</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': UserForm.password.$invalid}">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div id="passwordControls" class="col-sm-10">
+            <input id="password" name="password" type="text" required ng-maxlength="25" ng-minlength="5" class="form-control" ng-model="user.password" placeholder="Enter the User Password"></input>
+            <span class="help-block error" ng-show="UserForm.password.$error.required">required</span> 
+            <span class="help-block error" ng-show="UserForm.password.$error.minlength">minimum length is 5</span>
+            <span class="help-block error" ng-show="UserForm.password.$error.maxlength">maximum length is 25</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': UserForm.phoneNumber.$invalid}">
+        <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
+        <div id="phoneNumberControls" class="col-sm-10">
+            <input id="phoneNumber" name="phoneNumber" type="text" required ng-maxlength="12" ng-minlength="10" class="form-control" ng-model="user.phoneNumber" placeholder="Enter the User Phone Number"></input>
+            <span class="help-block error" ng-show="UserForm.phoneNumber.$error.required">required</span> 
+            <span class="help-block error" ng-show="UserForm.phoneNumber.$error.minlength">minimum length is 10</span>
+            <span class="help-block error" ng-show="UserForm.phoneNumber.$error.maxlength">maximum length is 12</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': UserForm.birthDate.$invalid}">
+        <label for="birthDate" class="col-sm-2 control-label">Birth Date</label>
+        <div id="birthDateControls" class="col-sm-10">
+            <date id="birthDate" name="birthDate" required ng-model="user.birthDate" placeholder="Enter the User Birth Date"></date>
+            <span class="help-block error" ng-show="UserForm.birthDate.$error.required">required</span> 
+            <span class="help-block error" ng-show="UserForm.birthDate.$error.dateFormat">does not match format "yyyy-MM-dd" (e.g. 2013-12-01)</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': UserForm.updateDate.$invalid}">
+        <label for="updateDate" class="col-sm-2 control-label">Update Date</label>
+        <div id="updateDateControls" class="col-sm-10">
+            <datetime id="updateDate" name="updateDate" required ng-model="user.updateDate" placeholder="Enter the User Update Date"></datetime>
+            <span class="help-block error" ng-show="UserForm.updateDate.$error.required">required</span> 
+            <span class="help-block error" ng-show="UserForm.updateDate.$error.datetimeFormat">does not match format "yyyy-MM-dd hh:mm:ss" (e.g. 2013-12-01 22:00:00)</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveUser" name="saveUser" class="btn btn-primary" ng-disabled="isClean() || UserForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteUser" name="deleteUser" class="btn btn-danger" ng-show="user.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
